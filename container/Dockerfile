@@ -10,6 +10,7 @@ RUN apt-get install -y  \
   gcc \
   gdb \
   git \
+  ncat \
   nodejs \
   python3-dev  \
   python3-venv \
@@ -24,5 +25,12 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install unicorn==2.1.0
 RUN pip install gmpy2 ptrlib pwntools pycryptodome sympy
 
+# dotfiles
+WORKDIR /root
+RUN git clone https://github.com/arch4e/dotfiles
+WORKDIR /root/dotfiles
+RUN /usr/bin/zsh install.sh
+
+WORKDIR /root
 CMD ["/usr/bin/zsh"]
 
